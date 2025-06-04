@@ -5,15 +5,18 @@ from datetime import datetime
 from data_loader import carregar_dados, preparar_dados_lstm
 from utils import buscar_ticker, analisar_tendencia, adicionar_medias_moveis
 from model import criar_modelo_lstm, treinar_e_prever
+from dotenv import load_dotenv
+import os
 
 st.set_page_config(page_title="Análise de Ações Avançada", layout="wide")
+load_dotenv()
 
 @st.cache_data(ttl=300)
 def carregar_dados_cache(ticker, inicio, fim):
     try:
         print(f"Carregando dados para {ticker} de {inicio} a {fim}")
         # Substitua "sua-chave-api" pela sua chave de API do Alpha Vantage
-        df = carregar_dados(ticker, inicio, fim, api_key="PWRWKPHV3S76LVR7")
+        df = carregar_dados(ticker, inicio, fim, api_key=os.getenv("ALPHA_VANTAGE_API_KEY"))
         df = adicionar_medias_moveis(df)
         print(f"Dados carregados com sucesso: {df.head()}")
         return df
