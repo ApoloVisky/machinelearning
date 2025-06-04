@@ -1,3 +1,11 @@
 .env
-_pychache_
-.venv
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.VSCode/
+.idea/
+*.ipynb_checkpoints
